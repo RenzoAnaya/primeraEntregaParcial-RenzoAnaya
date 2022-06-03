@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const routeProductos = require('./routes/productos')
-const routeCarrito = require('./routes/carrito')
+const routeCarrito = require('./routes/carrito');
+const res = require('express/lib/response');
 //const http = require('http')
 //const routeProducts = require('./routes/productRoutes');
 //const {Server : ioServer } = require('socket.io')
@@ -23,6 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/productos', routeProductos);
 app.use('/api/carrito', routeCarrito);
+
+
+app.get('*', (req,res) => {
+    res.send(`Error: -2, descripción: ruta ${req.originalUrl} método ${req.method} no implementada`)
+})
+ res.redirec
 
 
 
